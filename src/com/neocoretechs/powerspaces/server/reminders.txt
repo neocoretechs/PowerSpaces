@@ -1,0 +1,5 @@
+
+Sockets are acquired in LrInputTransmissionLine and LROutputTransmissionLine
+
+and TCPServer for Input and Output TransmissionLines which are derived from TCPServer.
+
