@@ -124,7 +124,7 @@ public class BigSackHandler {
                         //
                         // check result of the compare of the 2 elements, if 0 proceed
                         if( cmpRes == 0 ) {      
-                            DS = BigSackAdapter.getBigSackTreeSet((Comparable) eouElement);                                    
+                            DS= BigSackAdapter.getBigSackTreeSet((Comparable) eouElement);                                    
                             DS.put((Comparable) eouElement);
                         }
                 }
