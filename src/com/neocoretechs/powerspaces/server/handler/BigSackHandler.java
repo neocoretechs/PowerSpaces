@@ -30,7 +30,7 @@ public class BigSackHandler {
                 Exception e2 = null;
                 Comparable removed = null;
                 try {
-                        DS = BigSackAdapter.getBigSackSet((Comparable) args);
+                        DS = BigSackAdapter.getBigSackTreeSet((Comparable) args);
                         removed = (Comparable) DS.remove((Comparable) args);
                 } catch(Exception e) {
                         e2 = new Exception("Store exception "+e.getMessage());
@@ -73,8 +73,8 @@ public class BigSackHandler {
 
    public static Object PowerKernel_Store( Integer leg, CustomerConnectionPanel ccp, String db, Serializable so) throws PowerSpaceException {
         try {
-            DS = BigSackAdapter.getBigSackSet((Comparable) so);       
-            DS.add((Comparable) so);
+            DS = BigSackAdapter.getBigSackTreeSet((Comparable) so);       
+            DS.put((Comparable) so);
         } catch(Exception e) { 
         	return e;
         }
@@ -88,8 +88,8 @@ public class BigSackHandler {
    public static Object PowerKernel_StoreAll( Integer leg, CustomerConnectionPanel ccp, String db, Enumeration eso) throws PowerSpaceException {
         try { 
             while(eso.hasMoreElements()) {
-                DS = BigSackAdapter.getBigSackSet((Comparable) eso);      
-                DS.add((Comparable) eso.nextElement());
+                DS = BigSackAdapter.getBigSackTreeSet((Comparable) eso);      
+                DS.put((Comparable) eso.nextElement());
             }
         } catch(Exception e) {
         	return e;
@@ -101,8 +101,8 @@ public class BigSackHandler {
         try {
                 int cmpRes = co.compare((Object)so, (Object)sou);
                 if( cmpRes == 0 ) {
-                    DS = BigSackAdapter.getBigSackSet((Comparable) sou);  
-                    DS.add((Comparable)sou);
+                    DS = BigSackAdapter.getBigSackTreeSet((Comparable) sou);  
+                    DS.put((Comparable)sou);
                 }
         } catch(Exception e) { 
         	return e;
@@ -124,8 +124,8 @@ public class BigSackHandler {
                         //
                         // check result of the compare of the 2 elements, if 0 proceed
                         if( cmpRes == 0 ) {      
-                            DS = BigSackAdapter.getBigSackSet((Comparable) eouElement);                                    
-                            DS.add((Comparable) eouElement);
+                            DS = BigSackAdapter.getBigSackTreeSet((Comparable) eouElement);                                    
+                            DS.put((Comparable) eouElement);
                         }
                 }
         } catch(Exception e) { 
@@ -136,7 +136,7 @@ public class BigSackHandler {
 
    public static Object PowerKernel_Delete( Integer leg, CustomerConnectionPanel ccp, String db, Serializable so) throws PowerSpaceException {
                 try {
-                    DS = BigSackAdapter.getBigSackSet((Comparable) so);
+                    DS = BigSackAdapter.getBigSackTreeSet((Comparable) so);
                     DS.remove((Comparable) so);
                 } catch(Exception e) { 
                 	return e;
@@ -152,7 +152,7 @@ public class BigSackHandler {
         try {    
                 while(eso.hasMoreElements()) {
                 	Comparable so = (Comparable) eso.nextElement();
-                    DS = BigSackAdapter.getBigSackSet(so);
+                    DS = BigSackAdapter.getBigSackTreeSet(so);
                 	DS.remove(so);
                 }
         } catch(Exception e) { 
@@ -163,7 +163,7 @@ public class BigSackHandler {
 
    public static Object PowerKernel_Find( Integer leg, CustomerConnectionPanel ccp, String db, Serializable so) throws PowerSpaceException {
         try {
-        	DS = BigSackAdapter.getBigSackSet((Comparable)so); 
+        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so); 
             return DS.contains((Comparable) so);
         } catch(Exception e) { 
         	return e;
@@ -185,7 +185,7 @@ public class BigSackHandler {
    private static Object FindAllAscending(String db, Serializable so, int fIRST2) throws PowerSpaceException {
         List<Object> v = new ArrayList<Object>();
         try {
-        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
         	v = DS.headSetStream((Comparable) so).collect(Collectors.toList());
         } catch(Exception e) {
         	return e;
@@ -197,7 +197,7 @@ public class BigSackHandler {
    private static Object FindAllAscending(String db, Serializable so, Comparator co, int fIRST2) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(co).collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -228,7 +228,7 @@ public class BigSackHandler {
    private static Object FindAllDescending(String db, Serializable so, Comparator co, int fIRST2) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(co.reversed()).collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -240,7 +240,7 @@ public class BigSackHandler {
    public static Object PowerKernel_FindAllDescendingFromValue( Integer leg, CustomerConnectionPanel ccp, String db, Serializable so) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(((Comparator)so).reversed()).collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -274,7 +274,7 @@ public class BigSackHandler {
    private static Object FindAllAscendingByIndex(String db, Serializable so, Object index, int fIRST2) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted().collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -285,7 +285,7 @@ public class BigSackHandler {
    private static Object FindAllAscendingByIndex(String db, Serializable so, Object index, short starting) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted().collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -297,7 +297,7 @@ public class BigSackHandler {
    private static Object FindAllAscendingByIndex(String db, Serializable so, Object index, Comparator co, int fIRST2) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted().collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -308,7 +308,7 @@ public class BigSackHandler {
    private static Object FindAllAscendingByIndex(String db, Serializable so, Object index, Comparator co, short starting) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted().collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -348,7 +348,7 @@ public class BigSackHandler {
    private static Object FindAllDescendingByIndex(String db, Serializable so, Object index, int fIRST2) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(((Comparator)so).reversed()).collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -359,7 +359,7 @@ public class BigSackHandler {
    private static Object FindAllDescendingByIndex(String db, Serializable so, Object index, short starting) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(((Comparator)so).reversed()).collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -371,7 +371,7 @@ public class BigSackHandler {
    private static Object FindAllDescendingByIndex(String db, Serializable so, Object index, Comparator co, int fIRST2) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(((Comparator)so).reversed()).collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -382,7 +382,7 @@ public class BigSackHandler {
    private static Object FindAllDescendingByIndex(String db, Serializable so, Object index, Comparator co, short starting) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(((Comparator)so).reversed()).collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -422,7 +422,7 @@ public class BigSackHandler {
    private static Object FindAllUniqueAscending(String db, Serializable so, Object index, int fIRST2) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted().distinct().collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -433,7 +433,7 @@ public class BigSackHandler {
    private static Object FindAllUniqueAscending(String db, Serializable so, Object index, short starting) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted().distinct().collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -445,7 +445,7 @@ public class BigSackHandler {
    private static Object FindAllUniqueAscending(String db, Serializable so, Object index, Comparator co, int fIRST2) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(co).distinct().collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -456,7 +456,7 @@ public class BigSackHandler {
    private static Object FindAllUniqueAscending(String db, Serializable so, Object index, Comparator co, short starting) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(co).distinct().collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -496,7 +496,7 @@ public class BigSackHandler {
    private static Object FindAllUniqueDescending(String db, Serializable so, Object index, int fIRST2) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(((Comparator)so).reversed()).distinct().collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -507,7 +507,7 @@ public class BigSackHandler {
    private static Object FindAllUniqueDescending(String db, Serializable so, Object index, short starting) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(((Comparator)so).reversed()).distinct().collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -519,7 +519,7 @@ public class BigSackHandler {
    private static Object FindAllUniqueDescending(String db, Serializable so, Object index, Comparator co, int fIRST2) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(co.reversed()).distinct().collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
@@ -530,7 +530,7 @@ public class BigSackHandler {
    private static Object FindAllUniqueDescending(String db, Serializable so, Object index, Comparator co, short starting) throws PowerSpaceException {
 	      List<Object> v = new ArrayList<Object>();
 	        try {
-	        	DS = BigSackAdapter.getBigSackSet((Comparable)so);
+	        	DS = BigSackAdapter.getBigSackTreeSet((Comparable)so);
 	        	v = (List<Object>) DS.headSetStream((Comparable) so).sorted(co.reversed()).distinct().collect(Collectors.toList());
 	        } catch(Exception e) {
 	        	return e;
